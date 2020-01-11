@@ -11,7 +11,7 @@ const webpackConfig = {
     main: helpers.root('src', 'main'),
   },
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: ['.js', '.vue', '.ts'],
     alias: {
       'vue$': isDev ? 'vue/dist/vue.runtime.js' : 'vue/dist/vue.runtime.min.js',
       '@': helpers.root('src'),
@@ -23,6 +23,14 @@ const webpackConfig = {
         test: /\.vue$/,
         loader: 'vue-loader',
         include: [helpers.root('src')],
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
       },
       {
         test: /\.js$/,

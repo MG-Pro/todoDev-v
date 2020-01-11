@@ -13,17 +13,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import {Vue, Component, Prop} from "vue-property-decorator";
 
-
-  export default {
-    name: 'app',
-    data() {
-      return {
-        msg: 'Welcome to Your Vue.js App',
-      };
-    },
-  };
+  @Component({
+    name: 'App'
+  })
+  export default class App extends Vue {
+    msg: string = 'Welcome to Your Vue.js App'
+  }
 </script>
 
 <style lang="scss">
