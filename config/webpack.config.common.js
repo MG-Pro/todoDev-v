@@ -54,10 +54,24 @@ const webpackConfig = {
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'images/[name].[ext]?[hash]',
-          esModule: false,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'images/[name].[ext]?[hash]',
+              esModule: false,
+            },
+          },
+        ]
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: 'fonts/[name].[ext]',
+          }
         }
       }
     ],
@@ -65,9 +79,6 @@ const webpackConfig = {
   plugins: [
     new ProgressBarPlugin({
       clear: true,
-      callback:(...ctx) => {
-
-      }
     }),
     new VueLoaderPlugin(),
     new HtmlPlugin({template: 'index.html', chunksSortMode: 'dependency'}),
