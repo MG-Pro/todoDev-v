@@ -1,22 +1,19 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const helpers = require('./helpers')
 const commonConfig = require('./webpack.config.common')
-const isProd = process.env.NODE_ENV === 'production'
-const environment = isProd ? require('./env/prod.env') : require('./env/staging.env')
 
 const webpackConfig = merge(commonConfig, {
   mode: 'production',
   output: {
     path: helpers.root('dist'),
     publicPath: '/',
-    filename: 'js/[hash].js',
-    chunkFilename: 'js/[id].[hash].chunk.js',
+    filename: '[hash].js',
+    chunkFilename: '[id].[hash].chunk.js',
   },
   optimization: {
     runtimeChunk: 'single',
@@ -29,7 +26,7 @@ const webpackConfig = merge(commonConfig, {
       new UglifyJSPlugin({
         cache: true,
         parallel: true,
-        sourceMap: !isProd,
+        sourceMap: false,
       }),
     ],
     splitChunks: {
@@ -54,13 +51,9 @@ const webpackConfig = merge(commonConfig, {
     },
   },
   plugins: [
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['./dist'],
-    }),
-    new webpack.EnvironmentPlugin(environment),
     new MiniCSSExtractPlugin({
-      filename: 'css/[name].[hash].css',
-      chunkFilename: 'css/[id].[hash].css',
+      filename: '[name].[hash].css',
+      chunkFilename: '[id].[hash].css',
     }),
     new CompressionPlugin({
       filename: '[path].gz[query]',
@@ -72,14 +65,5 @@ const webpackConfig = merge(commonConfig, {
     new webpack.HashedModuleIdsPlugin(),
   ],
 })
-
-if(!isProd) {
-  webpackConfig.devtool = 'source-map'
-
-  if(process.env.npm_config_report) {
-    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-    webpackConfig.plugins.push(new BundleAnalyzerPlugin())
-  }
-}
 
 module.exports = webpackConfig

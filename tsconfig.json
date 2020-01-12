@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es5",
+    "module": "commonjs",
     "moduleResolution": "node",
     "lib": [
       "esnext",
       "esnext.asynciterable",
-      "dom"
+      "dom",
+      "dom.iterable"
     ],
     "esModuleInterop": true,
     //    "emitHelpers": true,
@@ -24,7 +25,8 @@
     }
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./server/**/*"
   ],
   "exclude": [
     "node_modules"

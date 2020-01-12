@@ -1,14 +1,10 @@
 <template>
   <div id="app">
-    <img src="./assets/images/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-    </ul>
-    <div class="test">
-      <i class="fas fa-camera"></i>
-    </div>
+    <p>
+      <router-link to="/">Go To Home</router-link>
+      <router-link to="/about">Go To About</router-link>
+    </p>
+    <router-view></router-view>
 
   </div>
 </template>
@@ -17,7 +13,7 @@
   import {Vue, Component, Prop} from "vue-property-decorator";
 
   @Component({
-    name: 'App'
+    name: 'App',
   })
   export default class App extends Vue {
     msg: string = 'Welcome to Your Vue.js App'

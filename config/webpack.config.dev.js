@@ -11,8 +11,8 @@ const webpackConfig = merge(commonConfig, {
   output: {
     path: helpers.root('dist'),
     publicPath: '/',
-    filename: 'js/[name].bundle.js',
-    chunkFilename: 'js/[id].chunk.js',
+    filename: '[name].bundle.js',
+    chunkFilename: '[id].chunk.js',
   },
   optimization: {
     runtimeChunk: 'single',
@@ -25,17 +25,6 @@ const webpackConfig = merge(commonConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new FriendlyErrorsPlugin(),
   ],
-  devServer: {
-    compress: true,
-    historyApiFallback: true,
-    hot: true,
-    open: false,
-    overlay: true,
-    progress: true,
-    port: 8000,
-    clientLogLevel: 'silent',
-    useLocalIp: false,
-  },
 })
 
 module.exports = webpackConfig

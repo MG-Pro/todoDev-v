@@ -1,14 +1,16 @@
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlPlugin = require('html-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const helpers = require('./helpers')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 
 const webpackConfig = {
   entry: {
     polyfill: '@babel/polyfill',
-    main: helpers.root('src', 'main'),
+    main: helpers.root('src', 'entry-client'),
   },
   resolve: {
     extensions: ['.js', '.vue', '.ts'],
@@ -67,7 +69,7 @@ const webpackConfig = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'images/[name].[ext]?[hash]',
+              name: '[name].[ext]?[hash]',
               esModule: false,
             },
           },
@@ -78,18 +80,22 @@ const webpackConfig = {
         use: {
           loader: 'file-loader',
           options: {
-            name: 'fonts/[name].[ext]',
+            name: '[name].[ext]',
           }
         }
       }
     ],
   },
   plugins: [
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['./dist'],
+    }),
     new ProgressBarPlugin({
       clear: true,
     }),
     new VueLoaderPlugin(),
     new HtmlPlugin({template: 'index.html', chunksSortMode: 'dependency'}),
+    new VueSSRClientPlugin(),
   ],
   stats: 'errors-only'
 }
