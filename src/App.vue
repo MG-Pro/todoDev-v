@@ -4,19 +4,18 @@
       <router-link to="/">Go To Home</router-link>
       <router-link to="/about">Go To About</router-link>
     </p>
-    <router-view></router-view>
+    <router-view/>
 
   </div>
 </template>
 
 <script lang="ts">
-  import {Vue, Component, Prop} from "vue-property-decorator";
+  import {Vue, Component} from "vue-property-decorator"
 
   @Component({
-    name: 'App',
+    name: 'App'
   })
   export default class App extends Vue {
-    msg: string = 'Welcome to Your Vue.js App'
   }
 </script>
 

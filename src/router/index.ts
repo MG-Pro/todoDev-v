@@ -1,15 +1,15 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import Home from '../components/Home.vue';
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from '../components/Home.vue'
 
-Vue.use(Router);
+Vue.use(Router)
 
-export function createRouter () {
+export function createRouter(): Router {
   return new Router({
     mode: 'history',
     routes: [
-      { path: '/', component: Home },
-      { path: '/about', component: Home },
-    ]
-  });
+      {path: '/', component: Home},
+      {path: '/about', component: Home},
+    ],
+  })
 }
