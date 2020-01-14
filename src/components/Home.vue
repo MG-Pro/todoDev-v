@@ -14,7 +14,8 @@
     name: 'App'
   })
   export default class App extends Vue {
-    msg: string = 'Welcome to Your Vue.js App'
+    msg: string = 'Welcome to Your Vue.js App 111'
+
   }
 </script>
 

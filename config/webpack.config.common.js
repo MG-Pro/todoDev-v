@@ -1,4 +1,4 @@
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlPlugin = require('html-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
@@ -38,7 +38,7 @@ const webpackConfig = {
         exclude: /node_modules/,
         options: {
           appendTsSuffixTo: [/\.vue$/],
-        }
+        },
       },
       {
         test: /\.js$/,
@@ -79,7 +79,7 @@ const webpackConfig = {
               esModule: false,
             },
           },
-        ]
+        ],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
@@ -87,9 +87,9 @@ const webpackConfig = {
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
-          }
-        }
-      }
+          },
+        },
+      },
     ],
   },
   plugins: [
@@ -103,7 +103,7 @@ const webpackConfig = {
     new HtmlPlugin({template: 'index.html', chunksSortMode: 'dependency'}),
     new VueSSRClientPlugin(),
   ],
-  stats: 'errors-only'
+  stats: 'errors-only',
 }
 
 module.exports = webpackConfig
